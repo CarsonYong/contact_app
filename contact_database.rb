@@ -29,13 +29,13 @@ class ContactDatabase
 
       if row[0].to_i == id.to_i
         test = true
-        puts row
+        return row
       #elsif row[0].to_i != id.to_i
       #puts "That contact cannot be found.
       end
     end
     if test == false
-      puts "Contact cannot be found "
+      return "Contact cannot be found "
     end
   end
   def self.find(contact)
@@ -43,11 +43,11 @@ class ContactDatabase
     CSV.foreach("contact.csv") do |row|
       if row[1].match(contact.to_s)
         test = true
-        puts row
+        return row
       end
     end
     if test == false
-      puts "cannot find contact"
+      return "cannot find contact"
     end
   end
 

@@ -19,21 +19,27 @@ require_relative 'contact_database'
   if @argv == "new"
     puts "Enter in an email"
     email = STDIN.gets.chomp.downcase
-    puts ContactDatabase.unique?(email)
+    #puts ContactDatabase.unique?(email)
 
-    if ContactDatabase.unique?(email) == true
-      puts "Enter in a name"
-      name = STDIN.gets.chomp.downcase  
-      new_contact = Contact.new(name, email, number)
+    #if ContactDatabase.unique?(email) == true
+      puts "Enter in your first name"
+      firstname = STDIN.gets.chomp.downcase  
+
+      puts "Enter in your last name"
+      lastname = STDIN.gets.chomp.downcase
+
+      new_contact = Contact.new(firstname, lastname, email)
       Contact.create(new_contact)
-      puts "Enter your number"
-      number = STDIN.gets.chomp.to_i
     end
+      #puts "Enter your number"
+      #number = STDIN.gets.chomp.to_i
+    #end
       #puts "#{@new_contact}"
-  elsif @argv =="list"
+  if @argv =="list"
     #ContactDatabase.read
+    Contact.connection
     Contact.all 
-
+    
   elsif @argv =="show"
       #puts "start"
       #puts ARGV
@@ -42,10 +48,20 @@ require_relative 'contact_database'
       #puts ARGV[1]
       #puts ARGV[1]
       #puts "start"
-      Contact.show(ARGV[1].to_i)
+      puts Contact.show(ARGV[1].to_i)
     elsif @argv == "find"
       #puts ARGV[1]
-      ContactDatabase.find(ARGV[1].to_s)
+      puts Contact.find(ARGV[1].to_s)
+
+     elsif @argv == "findemail"
+      puts Contact.find_by_email(ARGV[1].to_s)
+
+    elsif @argv == "findlastnameemail"
+      puts Contact.find_all_by_firstname(ARGV[1].to_s)
+    elsif @argv == "findlastnameemail"
+      puts Contact.find_all_by_firstname(ARGV[1].to_s)
+         
+         
     end
 
 
